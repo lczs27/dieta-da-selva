@@ -2,38 +2,170 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<title>Login</title>
+<title>Login - Plano Completo</title>
 <style>
-  body { font-family: Arial; text-align:center; margin: 40px; }
-  input { padding: 8px; width: 200px; margin: 10px 0; font-size: 16px; }
-  .error { color: red; }
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  body {
+    background-color: #1e293b; /* tom escuro do fundo */
+    color: #cbd5e1; /* texto claro */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container {
+    background-color: #283044; /* tom de azul escuro */
+    border-radius: 10px;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+  }
+
+  .info-panel {
+    flex: 1 1 350px;
+    padding: 30px 40px;
+    background-color: #1f2937;
+    border-right: 4px solid #16a34a; /* verde */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info-panel h2 {
+    color: #16a34a; /* verde */
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .info-panel p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #e0e0e0;
+  }
+
+  .login-panel {
+    flex: 1 1 350px;
+    background-color: #1e293b;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .login-panel h2 {
+    color: #38bdf8; /* azul */
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    background-color: #0f172a;
+    border: none;
+    border-radius: 6px;
+    color: #cbd5e1;
+    padding: 14px 12px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    outline: none;
+    border: 2px solid #16a34a; /* verde */
+  }
+
+  button {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+  }
+
+  .error {
+    color: #f87171; /* vermelho claro */
+    margin-top: 10px;
+    font-weight: 600;
+    min-height: 24px;
+    text-align: center;
+  }
+
+  /* Responsividade */
+  @media (max-width: 720px) {
+    .container {
+      flex-direction: column;
+    }
+    .info-panel, .login-panel {
+      flex: 1 1 auto;
+      border-right: none;
+      border-bottom: 4px solid #16a34a;
+      padding: 30px;
+    }
+  }
 </style>
 </head>
 <body>
 
-<h2>Login</h2>
-<input id="username" type="text" placeholder="Usuário" /><br />
-<input id="password" type="password" placeholder="Senha" /><br />
-<button onclick="login()">Entrar</button>
-<p id="error" class="error"></p>
+<div class="container">
+  <div class="info-panel">
+    <h2>Benefícios do Esporte e Alimentação Saudável</h2>
+    <p>
+      Praticar esportes regularmente melhora o condicionamento físico, aumenta a disposição e ajuda a controlar o peso.  
+      Uma alimentação balanceada, como a dieta da selva, oferece nutrientes essenciais para fortalecer músculos e articulações, além de melhorar a recuperação e o desempenho nos treinos.  
+      Com esse equilíbrio, você alcança seus objetivos de forma saudável, mantendo o corpo forte e a mente focada.
+    </p>
+  </div>
+
+  <div class="login-panel">
+    <h2>Faça seu Login</h2>
+    <input type="text" id="username" placeholder="Usuário" autocomplete="username" />
+    <input type="password" id="password" placeholder="Senha" autocomplete="current-password" />
+    <button onclick="login()">Entrar</button>
+    <p id="errorMsg" class="error"></p>
+  </div>
+</div>
 
 <script>
   const USER = "Lucas";
   const PASS = "Prot3gido";
 
   function login() {
-    const u = document.getElementById("username").value;
+    const u = document.getElementById("username").value.trim();
     const p = document.getElementById("password").value;
-    const error = document.getElementById("error");
+    const errorMsg = document.getElementById("errorMsg");
 
-    if(u === USER && p === PASS) {
-      sessionStorage.setItem("loggedIn", "true");  // sinaliza que está logado
-      window.location.href = "index.html";        // redireciona para o site principal
+    if (u === USER && p === PASS) {
+      sessionStorage.setItem("loggedIn", "true");
+      window.location.href = "index.html";
     } else {
-      error.textContent = "Usuário ou senha incorretos.";
+      errorMsg.textContent = "Usuário ou senha incorretos.";
     }
   }
 </script>
 
 </body>
 </html>
+
