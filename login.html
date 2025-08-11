@@ -164,8 +164,16 @@
       errorMsg.textContent = "Usuário ou senha incorretos.";
     }
   }
+
+  // --- NOVO CÓDIGO PARA LOGIN COM ENTER ---
+  document.addEventListener('keyup', function(event) {
+    // Verifica se a tecla pressionada é a "Enter"
+    if (event.key === 'Enter') {
+      // Chama a função de login
+      login();
+    }
+  });
 </script>
 
 </body>
 </html>
-
