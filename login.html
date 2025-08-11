@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Login</title>
+<style>
+  body { font-family: Arial; text-align:center; margin: 40px; }
+  input { padding: 8px; width: 200px; margin: 10px 0; font-size: 16px; }
+  .error { color: red; }
+</style>
+</head>
+<body>
+
+<h2>Login</h2>
+<input id="username" type="text" placeholder="Usuário" /><br />
+<input id="password" type="password" placeholder="Senha" /><br />
+<button onclick="login()">Entrar</button>
+<p id="error" class="error"></p>
+
+<script>
+  const USER = "Lucas";
+  const PASS = "Prot3gido";
+
+  function login() {
+    const u = document.getElementById("username").value;
+    const p = document.getElementById("password").value;
+    const error = document.getElementById("error");
+
+    if(u === USER && p === PASS) {
+      sessionStorage.setItem("loggedIn", "true");  // sinaliza que está logado
+      window.location.href = "index.html";        // redireciona para o site principal
+    } else {
+      error.textContent = "Usuário ou senha incorretos.";
+    }
+  }
+</script>
+
+</body>
+</html>
