@@ -16,6 +16,10 @@
       --alert:#c85b2f;     /* laranja alerta */
       --card-border:rgba(255,255,255,0.03);
       --glass: rgba(255,255,255,0.02);
+      /* Cores de Dificuldade */
+      --easy-color:#19d6a6; /* Verde */
+      --medium-color:#ffd662; /* Amarelo */
+      --hard-color:#c85b2f; /* Vermelho */
     }
     html,body{background:var(--bg);color:#e6f3f0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; margin:0; padding:22px;}
     header{padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 18px rgba(0,0,0,0.6); border:1px solid var(--card-border); display:flex;justify-content:space-between;align-items:center;gap:18px;}
@@ -95,6 +99,23 @@
     .recipe-content strong {
       color: var(--accent);
     }
+    
+    /* Cores de Dificuldade para as receitas */
+    .difficulty-easy { color: var(--easy-color); }
+    .difficulty-medium { color: var(--medium-color); }
+    .difficulty-hard { color: var(--hard-color); }
+
+    /* Estilo para as abas de refeição dentro da aba "Receitas" */
+    details.meal-tab {
+      background: rgba(255,255,255,0.03);
+      padding: 16px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 18px;
+    }
+    summary.meal-summary {
+      font-size: 20px;
+      color: var(--accent);
+    }
     /* responsive */
     @media(max-width:720px){ 
       header{flex-direction:column;align-items:flex-start;} 
@@ -136,7 +157,7 @@
 
 <div class="tabs">
   <button class="tab-btn" onclick="showTab('plano', this)">📋 Plano 7 dias</button>
-  <button class="tab-btn" onclick="showTab('receitas', this)">🍳 Receitas (20+)</button>
+  <button class="tab-btn" onclick="showTab('receitas', this)">🍳 Receitas (50)</button>
   <button class="tab-btn" onclick="showTab('porque', this)">💡 Por que comer assim?</button>
   <button class="tab-btn" onclick="showTab('maleficios', this)">⚠️ Malefícios dos Ultraprocessados</button>
   <button class="tab-btn" onclick="showTab('compras', this)">🧾 Lista de compras</button>
@@ -167,7 +188,6 @@
           <td>1 banana Cavendish (~110 g) + 20 g castanha de caju</td>
           <td>200 g peixe grelhado (ex.: <span class="highlight">salmón, merluza, dorada</span>) + 120 g abobrinha + brócolis</td>
         </tr>
-
         <tr>
           <td>D2</td>
           <td>2 ovos mexidos (~120 g) + 120 g salmón defumado + 1 kiwi</td>
@@ -175,7 +195,6 @@
           <td>1/2 maçã + 30 g nozes</td>
           <td>200 g <span class="highlight">carne bovina assada (picanha)</span> + couve refogada + 100 g cenoura cozida</td>
         </tr>
-
         <tr>
           <td>D3</td>
           <td>3 ovos cozidos (~180 g) + 30 g nozes + 1 fatia melão (150 g)</td>
@@ -183,7 +202,6 @@
           <td>1/2 maçã + 1 banana (~110 g)</td>
           <td>200 g peixe (caballa/atún) grelhado + salada + 40 g castanha de caju</td>
         </tr>
-
         <tr>
           <td>D4</td>
           <td>Omelete 3 ovos (~180 g) + 100 g <span class="highlight">carne desfiada</span> + 1/2 kiwi</td>
@@ -191,7 +209,6 @@
           <td>1 maçã + 20 g mel</td>
           <td>220 g <span class="highlight">carne bovina grelhada (contrafilé)</span> + couve refogada</td>
         </tr>
-
         <tr>
           <td>D5</td>
           <td>2 ovos fritos (~120 g) + 150 g carne moída + 1 laranja</td>
@@ -199,7 +216,6 @@
           <td>1/2 maçã + 20 g <span class="highlight">nozes de macadâmia ou piñones</span></td>
           <td>200 g <span class="highlight">carne moída refogada</span> + espinafre + 1 ovo cozido</td>
         </tr>
-
         <tr>
           <td>D6</td>
           <td>Omelete 3 ovos (~180 g) + 1 fatia melancia (~200 g)</td>
@@ -207,7 +223,6 @@
           <td>2 ovos cozidos (~120 g) + 1 banana (~110 g)</td>
           <td>250 g <span class="highlight">carne bovina grelhada (acém)</span> + salada colorida</td>
         </tr>
-
         <tr>
           <td>D7</td>
           <td>3 ovos cozidos (~180 g) + 1 banana (~110 g) + café sem açúcar</td>
@@ -224,13 +239,11 @@
         <div style="font-size:24px;color:var(--accent);margin-top:8px;">~140–200 g</div>
         <div class="small">Estimativa dependendo do dia — adequado para recuperação muscular.</div>
       </div>
-
       <div class="card">
         <div style="font-size:18px">⏱️ <strong>Duração</strong></div>
         <div style="font-size:24px;color:var(--accent);margin-top:8px;">7 dias</div>
         <div class="small">Plano rotativo semanal.</div>
       </div>
-
       <div class="card">
         <div style="font-size:18px">🥚 <strong>Ovos por semana</strong></div>
         <div style="font-size:24px;color:var(--accent);margin-top:8px;">40+</div>
@@ -240,211 +253,390 @@
   </section>
 
   <section id="receitas" class="tab">
-    <h2>Receitas detalhadas (com quantidades e modo de preparo) — 20+ opções 🍳</h2>
-    <p class="small">Clique em cada receita para expandir e ver o modo de preparo. Ajuste sal e azeite conforme seu gosto.</p>
-
-    <div class="grid-recipes">
-      <details>
-        <summary>🥚 Omelete proteico com espinafre</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 3 ovos (≈180 g), 50 g queso fresco, 50 g espinafre, 10 g manteiga, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Derreta a manteiga em uma frigideira. Refogue o espinafre por 1-2 minutos. Em uma tigela, bata os ovos com sal e pimenta e junte o queijo. Despeje a mistura na frigideira e cozinhe por 2-3 minutos de cada lado até ficar firme e dourado.</p>
+    <h2>Receitas detalhadas (com quantidades e modo de preparo) — 50 opções 🍳</h2>
+    <p class="small">Clique nas abas abaixo para ver as receitas de cada refeição. A cor do título indica a dificuldade: <span style="color:var(--easy-color);">Fácil</span>, <span style="color:var(--medium-color);">Médio</span> e <span style="color:var(--hard-color);">Difícil</span>.</p>
+    <div class="grid-recipes" style="display:block;">
+      <details class="meal-tab">
+        <summary class="meal-summary">☕ Café da Manhã</summary>
+        <div class="grid-recipes">
+          <details>
+            <summary class="difficulty-easy">🥚 Omelete proteico com espinafre</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 3 ovos (≈180 g), 50 g queso fresco, 50 g espinafre, 10 g manteiga, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Derreta a manteiga em uma frigideira. Refogue o espinafre por 1-2 minutos. Em uma tigela, bata os ovos com sal e pimenta e junte o queijo. Despeje a mistura na frigideira e cozinhe por 2-3 minutos de cada lado até ficar firme e dourado.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍳 Ovos mexidos com queijo mozzarella</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 3 ovos (180 g), 40 g de mozzarella ralada, 10 g de manteiga, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Bata os ovos em uma tigela. Derreta a manteiga em uma frigideira em fogo baixo. Adicione os ovos batidos e mexa continuamente com uma espátula por 3-4 minutos. Quando estiverem quase prontos, adicione a mozzarella e misture até que derreta. Tempere e sirva.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥚 Ovos cozidos perfeitos</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 2 ovos grandes.</p>
+              <p><strong>Modo de preparo:</strong> Coloque os ovos em uma panela e cubra com água fria. Leve para ferver. Quando a água começar a borbulhar, cozinhe por 8-9 minutos para uma gema mais firme. Transfira os ovos para um pote com água fria e gelo para parar o cozimento. Descasque e consuma.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍳 Shakshuka simplificada</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 2 ovos, 150 g de tomate picado, 1/2 cebola picada, pimenta, azeite e sal.</p>
+              <p><strong>Modo de preparo:</strong> Em uma frigideira, refogue a cebola no azeite. Adicione o tomate picado e os temperos e cozinhe por 5 minutos até formar um molho. Quebre os ovos sobre o molho e cozinhe por mais 6-8 minutos, até que as claras estejam firmes e as gemas ainda moles. Sirva diretamente da frigideira.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🌮 Omelete de Presunto e Queijo</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 3 ovos, 50g de presunto picado, 50g de queijo mussarela, 10ml de azeite, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Bata os ovos com sal e pimenta. Aqueça o azeite em uma frigideira e despeje os ovos. Adicione o presunto e o queijo sobre os ovos. Cozinhe em fogo baixo até o queijo derreter e o omelete ficar firme. Dobre e sirva.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍳 Ovos Mexidos com Salmão Defumado</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 3 ovos, 100g de salmão defumado, 5ml de azeite, sal e endro (dill) fresco picado.</p>
+              <p><strong>Modo de preparo:</strong> Em uma frigideira, refogue levemente o salmão defumado no azeite. Em uma tigela, bata os ovos com sal e despeje na frigideira. Mexa até que os ovos estejam cozidos no ponto desejado. Finalize com endro fresco picado por cima.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥓 Bacon com Ovos Mexidos</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 3 fatias de bacon, 3 ovos, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Em uma frigideira, frite o bacon até ficar crocante. Retire o bacon, deixando a gordura na frigideira. Bata os ovos com sal e pimenta e cozinhe na gordura do bacon, mexendo. Sirva os ovos mexidos com o bacon por cima.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥑 Abacate Recheado com Ovos</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 abacate maduro, 2 ovos, sal, pimenta e queijo parmesão ralado a gosto.</p>
+              <p><strong>Modo de preparo:</strong> Corte o abacate ao meio e retire o caroço. Escave um pouco da polpa para fazer um espaço para o ovo. Quebre um ovo em cada metade do abacate. Tempere com sal e pimenta e polvilhe queijo parmesão. Leve ao forno a 180°C por 15-20 minutos, ou até o ovo cozinhar.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥛 Leite Fermentado com Mel e Nozes</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 ml de leite fermentado (kefir ou iogurte natural), 15 g de mel, 20 g de nozes picadas.</p>
+              <p><strong>Modo de preparo:</strong> Misture o mel no leite fermentado e sirva com as nozes picadas por cima para um toque crocante. É uma opção rápida e saudável para começar o dia.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍌 Banana Frita na Manteiga com Canela</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana cortada em rodelas, 10g de manteiga, canela em pó a gosto.</p>
+              <p><strong>Modo de preparo:</strong> Derreta a manteiga em uma frigideira. Adicione as rodelas de banana e frite até dourar. Polvilhe canela em pó por cima antes de servir. Uma alternativa doce e energética.</p>
+            </div>
+          </details>
         </div>
       </details>
-
-      <details>
-        <summary>🐟 Salmón grelhado com limão</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de salmón, 10 ml de azeite, sal, pimenta, 1/2 limão.</p>
-          <p><strong>Modo de preparo:</strong> Tempere o salmão com sal e pimenta. Aqueça o azeite em uma frigideira em fogo alto e grelhe o salmão por 3-4 minutos de cada lado, dependendo da espessura. Esprema o limão por cima antes de servir.</p>
+      <details class="meal-tab">
+        <summary class="meal-summary">🍝 Almoço</summary>
+        <div class="grid-recipes">
+          <details>
+            <summary class="difficulty-easy">🥩 Bife de acém grelhado</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de acém, 5 g de sal, 5 g de alho em pó, 10 ml de azeite.</p>
+              <p><strong>Modo de preparo:</strong> Tempere o bife com sal e alho em pó. Aqueça o azeite em uma grelha ou frigideira. Grelhe o bife por 4-6 minutos de cada lado para um ponto médio. Ajuste o tempo conforme a sua preferência.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Carne bovina na manteiga</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de bife (fraldinha/picanha), 15 g de manteiga, sal grosso.</p>
+              <p><strong>Modo de preparo:</strong> Aqueça uma frigideira em fogo alto. Tempere o bife com sal grosso e sele por 2-3 minutos de cada lado para criar uma crosta. Abaixe o fogo, adicione a manteiga e regue a carne com a manteiga derretida por mais 1-2 minutos antes de servir.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Ensopado rápido de carne</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de carne em cubos, 100 g de cenoura picada, 50 g de pastinaca picada, temperos (sal, pimenta, páprica), água.</p>
+              <p><strong>Modo de preparo:</strong> Doure a carne em uma panela. Adicione os vegetais e os temperos. Cubra com água e cozinhe em fogo baixo por 20-25 minutos, ou até que a carne e os vegetais estejam macios. Sirva quente.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Strogonoff simplificado (sem creme industrial)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de carne bovina em tiras, 1 cebola picada, 50 g de cogumelos fatiados, 30 g de queijo requesón, azeite, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Refogue a cebola e os cogumelos no azeite. Adicione a carne em tiras e doure. Tempere com sal e pimenta. Quando a carne estiver cozida, desligue o fogo e adicione o queijo requesón, mexendo para que derreta e crie um molho cremoso. Sirva imediatamente.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Carne Moída com Abobrinha</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 250g de carne moída, 1 abobrinha média em cubos, 1/2 cebola picada, azeite, sal, pimenta, e orégano.</p>
+              <p><strong>Modo de preparo:</strong> Refogue a cebola no azeite até ficar macia. Adicione a carne moída e cozinhe até dourar. Tempere com sal, pimenta e orégano. Adicione a abobrinha em cubos e cozinhe em fogo baixo por mais 10 minutos, até que a abobrinha esteja macia, mas ainda crocante.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍗 Frango Desfiado com Salada</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200g de peito de frango cozido e desfiado, 100g de folhas verdes, 50g de tomate cereja, azeite e vinagre.</p>
+              <p><strong>Modo de preparo:</strong> Cozinhe o frango, desfie e tempere. Em uma tigela, misture as folhas verdes, o tomate cereja e o frango desfiado. Tempere com azeite, vinagre, sal e pimenta. Uma opção leve e proteica.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Bife Acebolado na Manteiga</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200g de contrafilé, 1 cebola cortada em rodelas, 10g de manteiga, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Tempere o bife com sal e pimenta. Em uma frigideira, derreta a manteiga e frite o bife. Retire o bife e, na mesma frigideira, refogue as rodelas de cebola até dourarem. Sirva o bife coberto com as cebolas.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-hard">🥩 Costela de Porco Assada com Tomilho</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 500g de costela de porco, 10g de sal grosso, pimenta do reino, tomilho fresco e 20ml de azeite.</p>
+              <p><strong>Modo de preparo:</strong> Misture o sal, pimenta, tomilho e azeite e esfregue na costela. Leve ao forno pré-aquecido a 160°C por 2 horas, coberto com papel alumínio. Depois, aumente a temperatura para 200°C e asse por mais 30 minutos sem o papel para dourar.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🐟 Sardinhas Assadas</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 300g de sardinhas frescas, 10ml de azeite, 1 limão, sal, pimenta, salsa picada.</p>
+              <p><strong>Modo de preparo:</strong> Limpe as sardinhas e tempere com sal, pimenta e azeite. Coloque em uma assadeira e leve ao forno a 200°C por 15-20 minutos. Finalize com suco de limão e salsa picada por cima.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍖 Ossobuco na Pressão</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 2 ossobucos, 1 cebola, 2 dentes de alho, 200ml de água, 20ml de azeite, sal, pimenta e alecrim.</p>
+              <p><strong>Modo de preparo:</strong> Doure a cebola e o alho no azeite na panela de pressão. Adicione o ossobuco e doure dos dois lados. Adicione a água e os temperos. Cozinhe por 40 minutos após pegar pressão. Sirva o ossobuco desfiando e com o caldo por cima.</p>
+            </div>
+          </details>
         </div>
       </details>
-
-      <details>
-        <summary>🥩 Bife de acém grelhado</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de acém, 5 g de sal, 5 g de alho em pó, 10 ml de azeite.</p>
-          <p><strong>Modo de preparo:</strong> Tempere o bife com sal e alho em pó. Aqueça o azeite em uma grelha ou frigideira. Grelhe o bife por 4-6 minutos de cada lado para um ponto médio. Ajuste o tempo conforme a sua preferência.</p>
+      <details class="meal-tab">
+        <summary class="meal-summary">⚡ Pré/Pós-treino</summary>
+        <div class="grid-recipes">
+          <details>
+            <summary class="difficulty-easy">🥣 Vitamina rápida (pós-treino leve)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 ml de leite integral, 1 banana (~110 g), 20 g de nozes.</p>
+              <p><strong>Modo de preparo:</strong> Basta adicionar todos os ingredientes no liquidificador e bater até obter uma mistura homogênea. Consuma logo após o preparo para um lanche rápido e nutritivo.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍠 Batata alternativa: banana assada</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana Cavendish (~110 g), 20 g de castanhas de caju.</p>
+              <p><strong>Modo de preparo:</strong> Preaqueça o forno a 180°C. Coloque a banana inteira (com a casca) em uma assadeira e asse por cerca de 20 minutos. Ela deve ficar macia e doce por dentro. Sirva com as castanhas por cima para um pré-treino rápido.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🌰 Mix energético (oleaginosas)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 30 g de mix de nozes, castanha de caju e amêndoas.</p>
+              <p><strong>Modo de preparo:</strong> Simplesmente misture as oleaginosas. Consuma como um snack rápido e nutritivo, rico em gorduras boas e minerais.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍫 Snack: Banana com nozes</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana grande, 20 g de nozes picadas.</p>
+              <p><strong>Modo de preparo:</strong> Corte a banana ao meio no sentido do comprimento. Polvilhe as nozes picadas por cima. É um pré-treino de rápida digestão, perfeito para dar energia e gorduras boas.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍌 Shake Proteico de Banana</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana, 20g de proteína em pó (whey protein), 200ml de leite integral.</p>
+              <p><strong>Modo de preparo:</strong> Coloque a banana, a proteína em pó e o leite no liquidificador. Bata até obter uma consistência cremosa e homogênea. É ideal para o pós-treino, ajudando na recuperação muscular.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍠 Batata Doce Cozida</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 batata doce média.</p>
+              <p><strong>Modo de preparo:</strong> Lave bem a batata doce. Coloque-a em uma panela com água e cozinhe até ficar macia (cerca de 20-30 minutos). Descasque e consuma como pré-treino para uma fonte de carboidrato complexo.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥜 Pasta de Amendoim com Maçã</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 maçã, 20g de pasta de amendoim integral.</p>
+              <p><strong>Modo de preparo:</strong> Corte a maçã em fatias e espalhe a pasta de amendoim sobre elas. Rápido, prático e ideal para um pré-treino, fornecendo carboidratos e gorduras saudáveis.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥚 Ovos Cozidos e Frutas</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 2 ovos cozidos, 1 xícara de melão picado.</p>
+              <p><strong>Modo de preparo:</strong> Basta cozinhar os ovos e servir com a fruta picada. Uma combinação perfeita de proteína de alta qualidade e carboidratos de rápida absorção.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍯 Iogurte com Mel</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 pote de iogurte natural integral, 1 colher de sopa de mel.</p>
+              <p><strong>Modo de preparo:</strong> Misture o mel no iogurte. Simples e eficaz para uma dose de energia e probióticos.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍌 Banana com Queijo</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana, 50g de queijo coalho ou queijo fresco.</p>
+              <p><strong>Modo de preparo:</strong> Corte a banana em fatias e intercale com o queijo. Você pode grelhar o queijo para ficar mais saboroso. Combinação de carboidrato e proteína.</p>
+            </div>
+          </details>
         </div>
       </details>
-
-      <details>
-        <summary>🥩 Carne bovina na manteiga</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de bife (fraldinha/picanha), 15 g de manteiga, sal grosso.</p>
-          <p><strong>Modo de preparo:</strong> Aqueça uma frigideira em fogo alto. Tempere o bife com sal grosso e sele por 2-3 minutos de cada lado para criar uma crosta. Abaixe o fogo, adicione a manteiga e regue a carne com a manteiga derretida por mais 1-2 minutos antes de servir.</p>
+      <details class="meal-tab">
+        <summary class="meal-summary">🍽️ Jantar</summary>
+        <div class="grid-recipes">
+          <details>
+            <summary class="difficulty-medium">🐟 Salmón grelhado com limão</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de salmón, 10 ml de azeite, sal, pimenta, 1/2 limão.</p>
+              <p><strong>Modo de preparo:</strong> Tempere o salmão com sal e pimenta. Aqueça o azeite em uma frigideira em fogo alto e grelhe o salmão por 3-4 minutos de cada lado, dependendo da espessura. Esprema o limão por cima antes de servir.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🐟 Merluza à provençal</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de merluza, 10 ml de azeite, 1 dente de alho picado, salsa fresca picada, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Tempere o filé de merluza com sal e pimenta. Aqueça o azeite em uma frigideira. Doure o alho por 30 segundos, adicione o peixe e grelhe por 3-4 minutos de cada lado. Finalize com salsa picada.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍖 Costela assada (batch cook)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 kg de costela, sal, pimenta, 40 g de manteiga.</p>
+              <p><strong>Modo de preparo:</strong> Tempere a costela com sal e pimenta. Cubra com manteiga. Embrulhe bem em papel alumínio e leve ao forno pré-aquecido a 150°C. Asse por 3-4 horas, ou até que a carne esteja macia e se descolando do osso. Porcione e guarde na geladeira ou congele para a semana.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥩 Acém ao alho e ervas</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de acém, 10 g de alho picado, ervas (alecrim, tomilho), 10 ml de azeite, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Misture o alho picado, as ervas, azeite, sal e pimenta. Esfregue essa mistura no acém e deixe marinar por 30 minutos. Leve para assar em forno pré-aquecido a 200°C por 25-30 minutos.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍤 Peixe grelhado com salsa de tomate</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de peixe, 60 g de tomate picado, 5 g de cebola picada, suco de 1/2 limão e coentro picado.</p>
+            <p><strong>Modo de preparo:</strong> Prepare a salsa misturando o tomate, a cebola, o limão e o coentro. Reserve. Grelhe o peixe temperado com sal e pimenta em uma frigideira quente. Sirva o peixe com a salsa crua por cima.</p>
+          </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥙 Wrap improvisado (folha grande de alface)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de carne desfiada, 30 g de queijo requesón, folhas grandes de alface.</p>
+              <p><strong>Modo de preparo:</strong> Aqueça a carne desfiada. Coloque a carne e o queijo requesón sobre uma folha de alface grande. Enrole para formar um wrap. É uma alternativa rápida e sem carboidratos refinados.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥩 Hambúrguer caseiro (sem pão)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 g de carne moída, sal, pimenta, fatias de queijo requesón, salada de sua preferência.</p>
+              <p><strong>Modo de preparo:</strong> Modele a carne moída em forma de hambúrguer e tempere com sal e pimenta. Grelhe em uma frigideira ou grelha por 3-4 minutos de cada lado, até atingir o ponto desejado. Sirva sobre uma cama de salada e com fatias de queijo requesón por cima.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥣 Sopa de Abóbora com Gengibre</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 500g de abóbora em cubos, 1 pedaço de gengibre ralado (2cm), 1/2 cebola, 500ml de água, azeite, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Refogue a cebola e o gengibre no azeite. Adicione a abóbora e a água. Cozinhe até a abóbora ficar macia. Triture com um mixer ou liquidificador. Tempere com sal e pimenta e sirva quente.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍗 Frango Assado com Legumes</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 2 filés de frango (300g), 1 cenoura, 1 abobrinha, 1 cebola, azeite, sal, pimenta, páprica defumada e alecrim.</p>
+              <p><strong>Modo de preparo:</strong> Corte os legumes em pedaços grandes. Tempere o frango e os legumes com azeite, sal, pimenta, páprica e alecrim. Coloque tudo em uma assadeira e leve ao forno a 200°C por 30-40 minutos, ou até o frango estar cozido e os legumes macios.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-hard">🥩 Carré de Cordeiro Assado</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 400g de carré de cordeiro, 2 dentes de alho picados, 1 ramo de alecrim, azeite, sal e pimenta.</p>
+              <p><strong>Modo de preparo:</strong> Tempere o carré de cordeiro com alho, alecrim, azeite, sal e pimenta. Sele a carne em uma frigideira bem quente por 2 minutos de cada lado. Leve ao forno pré-aquecido a 200°C por 15-20 minutos para um ponto mal passado. Sirva com o molho que se formou na assadeira.</p>
+            </div>
+          </details>
         </div>
       </details>
-
-      <details>
-        <summary>🐟 Merluza à provençal</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de merluza, 10 ml de azeite, 1 dente de alho picado, salsa fresca picada, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Tempere o filé de merluza com sal e pimenta. Aqueça o azeite em uma frigideira. Doure o alho por 30 segundos, adicione o peixe e grelhe por 3-4 minutos de cada lado. Finalize com salsa picada.</p>
+      <details class="meal-tab">
+        <summary class="meal-summary">🍰 Sobremesas</summary>
+        <div class="grid-recipes">
+          <details>
+            <summary class="difficulty-easy">🍮 Iogurte integral com mel e nozes</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 150 g de iogurte integral, 10 g de mel, 20 g de nozes picadas.</p>
+              <p><strong>Modo de preparo:</strong> Em um pote, misture o iogurte com o mel. Adicione as nozes por cima para dar uma textura crocante.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥛 Leite morno com mel (antes de dormir)</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200 ml de leite integral, 10 g de mel.</p>
+              <p><strong>Modo de preparo:</strong> Aqueça o leite em uma panela ou no micro-ondas até ficar morno. Adicione o mel e misture bem. Consuma cerca de 30 minutos antes de dormir para ajudar a relaxar.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍓 Gelatina Caseira de Frutas</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200g de frutas (morango, kiwi), 1 envelope de gelatina sem sabor, 200ml de água, 20g de mel.</p>
+              <p><strong>Modo de preparo:</strong> Prepare a gelatina de acordo com as instruções da embalagem, usando a água e o mel para adoçar. Adicione as frutas picadas em potinhos individuais. Despeje a gelatina por cima e leve à geladeira até firmar. É uma sobremesa leve e hidratante.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥑 Creme de Abacate com Cacau</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 abacate maduro, 20g de cacau em pó 100%, 20g de mel, 50ml de leite integral.</p>
+              <p><strong>Modo de preparo:</strong> Em um liquidificador, coloque o abacate, o cacau em pó, o mel e o leite. Bata até obter uma mistura homogênea e cremosa. Sirva gelado. É uma sobremesa rica em gorduras boas e saborosa.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🥭 Sorvete Rápido de Manga e Iogurte</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200g de manga congelada, 150g de iogurte natural integral, 15g de mel.</p>
+              <p><strong>Modo de preparo:</strong> Coloque a manga, o iogurte e o mel no liquidificador. Bata até obter uma consistência cremosa. Sirva imediatamente como um sorvete caseiro e refrescante.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍎 Maçã Assada com Canela e Mel</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 maçã, 10g de mel, canela em pó a gosto.</p>
+              <p><strong>Modo de preparo:</strong> Corte a maçã ao meio e retire o miolo. Coloque as metades em uma assadeira, regue com o mel e polvilhe a canela. Leve ao forno a 180°C por cerca de 20 minutos, ou até a maçã ficar macia.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🍮 Mousse de Iogurte com Morango</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 200g de iogurte natural integral, 100g de morangos, 10g de gelatina sem sabor.</p>
+              <p><strong>Modo de preparo:</strong> Prepare a gelatina de acordo com as instruções. Em um liquidificador, bata o iogurte e os morangos. Adicione a gelatina dissolvida e bata novamente. Leve para a geladeira até firmar. Sirva com morangos frescos por cima.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍑 Pêssego Grelhado com Mel</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 pêssego maduro, 5g de manteiga, 10g de mel.</p>
+              <p><strong>Modo de preparo:</strong> Corte o pêssego ao meio e retire o caroço. Derreta a manteiga em uma frigideira. Grelhe o pêssego com o lado cortado para baixo por 2-3 minutos. Regue com mel e sirva quente.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-easy">🍇 Uvas Congeladas</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 cacho de uvas sem sementes.</p>
+              <p><strong>Modo de preparo:</strong> Lave e seque as uvas. Coloque-as em um recipiente e leve ao freezer por algumas horas. O resultado é um snack refrescante, perfeito para dias quentes.</p>
+            </div>
+          </details>
+          <details>
+            <summary class="difficulty-medium">🥞 Panqueca de Banana e Ovo</summary>
+            <div class="recipe-content">
+              <p><strong>Ingredientes:</strong> 1 banana madura, 2 ovos, 5g de manteiga, mel a gosto.</p>
+              <p><strong>Modo de preparo:</strong> Amasse a banana em uma tigela. Adicione os ovos e misture bem. Em uma frigideira, derreta a manteiga e despeje pequenas porções da massa. Cozinhe de cada lado até dourar. Sirva regado com mel.</p>
+            </div>
+          </details>
         </div>
       </details>
-
-      <details>
-        <summary>🥣 Vitamina rápida (pós-treino leve)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 1 banana (~110 g), 20 g de nozes.</p>
-          <p><strong>Modo de preparo:</strong> Basta adicionar todos os ingredientes no liquidificador e bater até obter uma mistura homogênea. Consuma logo após o preparo para um lanche rápido e nutritivo.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥗 Salada robusta com atum</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 100 g de atum em água (escorrido), 100 g de mix de folhas verdes, 30 g de nozes, 10 ml de azeite e vinagre a gosto.</p>
-          <p><strong>Modo de preparo:</strong> Misture as folhas verdes, o atum e as nozes em uma tigela. Tempere com azeite, vinagre, sal e pimenta. Sirva imediatamente.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍳 Ovos mexidos com queijo mozzarella</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 3 ovos (180 g), 40 g de mozzarella ralada, 10 g de manteiga, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Bata os ovos em uma tigela. Derreta a manteiga em uma frigideira em fogo baixo. Adicione os ovos batidos e mexa continuamente com uma espátula por 3-4 minutos. Quando estiverem quase prontos, adicione a mozzarella e misture até que derreta. Tempere e sirva.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍖 Costela assada (batch cook)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 1 kg de costela, sal, pimenta, 40 g de manteiga.</p>
-          <p><strong>Modo de preparo:</strong> Tempere a costela com sal e pimenta. Cubra com manteiga. Embrulhe bem em papel alumínio e leve ao forno pré-aquecido a 150°C. Asse por 3-4 horas, ou até que a carne esteja macia e se descolando do osso. Porcione e guarde na geladeira ou congele para a semana.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥛 Leite morno com mel (antes de dormir)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 10 g de mel.</p>
-          <p><strong>Modo de preparo:</strong> Aqueça o leite em uma panela ou no micro-ondas até ficar morno. Adicione o mel e misture bem. Consuma cerca de 30 minutos antes de dormir para ajudar a relaxar.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍠 Batata alternativa: banana assada</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 1 banana Cavendish (~110 g), 20 g de castanhas de caju.</p>
-          <p><strong>Modo de preparo:</strong> Preaqueça o forno a 180°C. Coloque a banana inteira (com a casca) em uma assadeira e asse por cerca de 20 minutos. Ela deve ficar macia e doce por dentro. Sirva com as castanhas por cima para um pré-treino rápido.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥩 Acém ao alho e ervas</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de acém, 10 g de alho picado, ervas (alecrim, tomilho), 10 ml de azeite, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Misture o alho picado, as ervas, azeite, sal e pimenta. Esfregue essa mistura no acém e deixe marinar por 30 minutos. Leve para assar em forno pré-aquecido a 200°C por 25-30 minutos.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥚 Ovos cozidos perfeitos</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 2 ovos grandes.</p>
-          <p><strong>Modo de preparo:</strong> Coloque os ovos em uma panela e cubra com água fria. Leve para ferver. Quando a água começar a borbulhar, cozinhe por 8-9 minutos para uma gema mais firme. Transfira os ovos para um pote com água fria e gelo para parar o cozimento. Descasque e consuma como um snack pós-treino.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥩 Strogonoff simplificado (sem creme industrial)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de carne bovina em tiras, 1 cebola picada, 50 g de cogumelos fatiados, 30 g de queijo requesón, azeite, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Refogue a cebola e os cogumelos no azeite. Adicione a carne em tiras e doure. Tempere com sal e pimenta. Quando a carne estiver cozida, desligue o fogo e adicione o queijo requesón, mexendo para que derreta e crie um molho cremoso. Sirva imediatamente.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍤 Peixe grelhado com salsa de tomate</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de peixe, 60 g de tomate picado, 5 g de cebola picada, suco de 1/2 limão e coentro picado.</p>
-        <p><strong>Modo de preparo:</strong> Prepare a salsa misturando o tomate, a cebola, o limão e o coentro. Reserve. Grelhe o peixe temperado com sal e pimenta em uma frigideira quente. Sirva o peixe com a salsa crua por cima.</p>
-      </div>
-      </details>
-
-      <details>
-        <summary>🥙 Wrap improvisado (folha grande de alface)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de carne desfiada, 30 g de queijo requesón, folhas grandes de alface.</p>
-          <p><strong>Modo de preparo:</strong> Aqueça a carne desfiada. Coloque a carne e o queijo requesón sobre uma folha de alface grande. Enrole para formar um wrap. É uma alternativa rápida e sem carboidratos refinados.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍮 Iogurte integral com mel e nozes</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 150 g de iogurte integral, 10 g de mel, 20 g de nozes picadas.</p>
-          <p><strong>Modo de preparo:</strong> Em um pote, misture o iogurte com o mel. Adicione as nozes por cima para dar uma textura crocante.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍳 Tortilla rápida de batata alternativa (cenoura ralada)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 3 ovos, 150 g de cenoura ralada, 30 g de queijo mozzarella, azeite, sal e pimenta.</p>
-          <p><strong>Modo de preparo:</strong> Bata os ovos com a cenoura ralada, o queijo, sal e pimenta. Aqueça um pouco de azeite em uma frigideira. Despeje a mistura e cozinhe por 5-7 minutos de cada lado, até ficar dourada e cozida por dentro.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥩 Ensopado rápido de carne</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de carne em cubos, 100 g de cenoura picada, 50 g de pastinaca picada, temperos (sal, pimenta, páprica), água.</p>
-          <p><strong>Modo de preparo:</strong> Doure a carne em uma panela. Adicione os vegetais e os temperos. Cubra com água e cozinhe em fogo baixo por 20-25 minutos, ou até que a carne e os vegetais estejam macios. Sirva quente.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🍫 Snack: Banana com nozes</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 1 banana grande, 20 g de nozes picadas.</p>
-          <p><strong>Modo de preparo:</strong> Corte a banana ao meio no sentido do comprimento. Polvilhe as nozes picadas por cima. É um pré-treino de rápida digestão, perfeito para dar energia e gorduras boas.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥩 Hambúrguer caseiro (sem pão)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 g de carne moída, sal, pimenta, fatias de queijo requesón, salada de sua preferência.</p>
-          <p><strong>Modo de preparo:</strong> Modele a carne moída em forma de hambúrguer e tempere com sal e pimenta. Grelhe em uma frigideira ou grelha por 3-4 minutos de cada lado, até atingir o ponto desejado. Sirva sobre uma cama de salada e com fatias de queijo requesón por cima.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥚 Shakshuka simplificada</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 2 ovos, 150 g de tomate picado, 1/2 cebola picada, pimenta, azeite e sal.</p>
-          <p><strong>Modo de preparo:</strong> Em uma frigideira, refogue a cebola no azeite. Adicione o tomate picado e os temperos e cozinhe por 5 minutos até formar um molho. Quebre os ovos sobre o molho e cozinhe por mais 6-8 minutos, até que as claras estejam firmes e as gemas ainda moles. Sirva diretamente da frigideira.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🥛 Leite fermentado caseiro (kefir style)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 1 colher de sopa de iogurte natural (com culturas vivas) ou grãos de kefir (opcional).</p>
-          <p><strong>Modo de preparo:</strong> Misture os ingredientes em um pote de vidro. Deixe em temperatura ambiente por 12-24 horas. Ele vai engrossar e ficar com um sabor levemente ácido. Guarde na geladeira após a fermentação. É uma forma de melhorar a digestibilidade do leite.</p>
-        </div>
-      </details>
-
-      <details>
-        <summary>🌰 Mix energético (oleaginosas)</summary>
-        <div class="recipe-content">
-          <p><strong>Ingredientes:</strong> 30 g de mix de nozes, castanha de caju e amêndoas.</p>
-          <p><strong>Modo de preparo:</strong> Simplesmente misture as oleaginosas. Consuma como um snack rápido e nutritivo, rico em gorduras boas e minerais.</p>
-        </div>
-      </details>
-
     </div>
-
-    <p class="small" style="margin-top:12px;"></p>
   </section>
 
   <section id="porque" class="tab">
     <h2>Por que comer assim? — benefícios detalhados 💡</h2>
     <p class="small">Abaixo estão os benefícios das categorias principais de alimentos incluídos na Dieta da Selva.</p>
-
     <div class="card-row" style="margin-top:12px;">
       <div class="card">
         <div style="font-size:16px">🥩 <strong>Carne gordurosa — benefícios</strong></div>
@@ -456,7 +648,6 @@
           <li>Para atletas, fornece aminoácidos essenciais para reparo muscular.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🧈 <strong>Manteiga — benefícios</strong></div>
         <ul>
@@ -465,7 +656,6 @@
           <li>Manteiga clarificada (ghee) tem ponto de fumaça maior e é uma opção estável para frituras.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🥛 <strong>Leite e laticínios (queso fresco/requesón/mozzarella)</strong></div>
         <ul>
@@ -475,7 +665,6 @@
         </ul>
       </div>
     </div>
-
     <div class="card-row" style="margin-top:12px;">
       <div class="card">
         <div style="font-size:16px">🥚 <strong>Ovos — benefícios</strong></div>
@@ -485,7 +674,6 @@
           <li>Gemas contêm vitaminas A, D, E e minerais importantes.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🍓🍯 <strong>Frutas + Mel — benefícios</strong></div>
         <ul>
@@ -494,7 +682,6 @@
           <li>Mel: fonte rápida de glicose/energia, com propriedades antimicrobianas leves; bom em pequenas quantidades.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🍉 <strong>Melancia e sementes — benefícios</strong></div>
         <ul>
@@ -503,12 +690,10 @@
         </ul>
       </div>
     </div>
-
     <div style="margin-top:12px;">
       <h3 style="color:var(--accent)">Cenoura como fonte de carboidrato</h3>
       <p class="small">100 g de cenoura crua ≈ 10 g carboidratos; fornece betacaroteno (precursor da vitamina A) e fibras. Boa para variar as fontes de carbo.</p>
     </div>
-
     <div class="card-row" style="margin-top:12px;">
       <div class="card">
         <div style="font-size:16px">🍯 <strong>Uso de Mel em Sobremesas e Lanches</strong></div>
@@ -519,14 +704,12 @@
         </ul>
       </div>
     </div>
-
     <p class="small" style="margin-top:10px;"><strong>Observação importante:</strong> Esses benefícios são gerais — se tiver histórico de dislipidemia, colesterol ou condições médicas, consulte seu médico para monitorização (perfil lipídico, função renal, etc.).</p>
   </section>
 
   <section id="maleficios" class="tab">
     <h2>⚠️ Malefícios dos Ultraprocessados</h2>
     <p class="small">Descrição dos principais riscos associados ao consumo frequente de produtos ultraprocessados, óleos vegetais refinados e alimentos ricos em açúcar refinado.</p>
-
     <div class="card-row" style="margin-top:12px;">
       <div class="card">
         <div style="font-size:16px">🍔 <strong>Fast-foods (ex.: Burger King, McDonald's)</strong></div>
@@ -536,7 +719,6 @@
           <li>Consumo habitual pode elevar pressão arterial, piorar perfil lipídico e aumentar resistência insulínica.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🛢️ <strong>Óleos vegetais refinados (canola, girassol, soja)</strong></div>
         <ul>
@@ -545,7 +727,6 @@
           <li>Prefira azeite extra‑virgem para tempero; para frituras, opções como manteiga clarificada/ghee ou banha (em moderação) têm maior estabilidade.</li>
         </ul>
       </div>
-
       <div class="card">
         <div style="font-size:16px">🍫 <strong>Produtos ricos em açúcar refinado (ex.: Milka, Nutella)</strong></div>
         <ul>
@@ -555,7 +736,6 @@
         </ul>
       </div>
     </div>
-
     <div class="card-row" style="margin-top:12px;">
       <div class="card">
         <div style="font-size:16px">🍚 <strong>Arroz e Macarrão: A "Ração do Governo"?</strong></div>
@@ -567,7 +747,6 @@
         </ul>
       </div>
     </div>
-
     <div style="margin-top:12px;">
       <h3 style="color:var(--accent)">Exemplos e por que evitar (prático)</h3>
       <ul>
@@ -582,7 +761,6 @@
   <section id="compras" class="tab">
     <h2>🧾 Lista de compras (quantidades semanais aproximadas)</h2>
     <p class="small">As quantidades são estimadas para 1 pessoa seguindo o plano de 7 dias.</p>
-
     <table>
       <thead><tr><th>Item</th><th>Quantidade (aprox.)</th></tr></thead>
       <tbody>
@@ -602,7 +780,6 @@
         <tr><td>Azeite extra-virgem</td><td>~100–200 ml</td></tr>
       </tbody>
     </table>
-
     <p class="small">Dica: prefira comprar porções maiores em promoção e porcionar (congelar) para economizar tempo e dinheiro.</p>
   </section>
 
