@@ -52,4 +52,564 @@
     .emoji{font-size:18px;margin-right:8px;}
     footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center;}
     code{background:#06242a;padding:2px 6px;border-radius:6px;color:var(--accent);}
-    .grid-recipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap
+    .grid-recipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
+    .highlight{color:var(--accent-2);font-weight:700;}
+    
+    /* Estilo para as receitas expansíveis */
+    details {
+      background: var(--panel);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+    summary {
+      font-size: 16px;
+      font-weight: bold;
+      color: #e6f3f0;
+      list-style: none; /* Remove o marcador padrão do summary */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.1s ease;
+    }
+    summary:active { transform: scale(0.99); }
+    summary::after {
+      content: '▶️';
+      font-size: 14px;
+      margin-left: 10px;
+      transition: transform 0.2s;
+    }
+    details[open] > summary::after {
+      content: '🔽';
+      transform: rotate(90deg);
+    }
+    .recipe-content {
+      padding-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .recipe-content strong {
+      color: var(--accent);
+    }
+    /* responsive */
+    @media(max-width:720px){ 
+      header{flex-direction:column;align-items:flex-start;} 
+      .user-profile { align-self: flex-end; }
+      .card-row{flex-direction:column;} 
+    }
+  </style>
+  <script>
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+    
+    function showTab(id, btn){
+      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+    window.addEventListener('DOMContentLoaded', ()=>{ document.querySelectorAll('.tab-btn')[0].click(); });
+  </script>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div style="font-size:20px">🌿</div>
+    <div>
+      <h1>Dieta da Selva — Plano Completo</h1>
+      <p class="small">Adaptado para praticante de Jiu-Jitsu — 1,90 m / ~87 kg. Consulte profissional de saúde.</p>
+    </div>
+  </div>
+  <div class="user-profile">
+    <img src="foto de perfil.jpg" alt="Foto de Perfil">
+  </div>
+</header>
+
+<div class="alert">⚠️ <strong>Aviso:</strong> Este guia é informativo, baseado em conteúdos públicos e adaptações. Não substitui avaliação médica/nutricional personalizada.</div>
+
+<div class="tabs">
+  <button class="tab-btn" onclick="showTab('plano', this)">📋 Plano 7 dias</button>
+  <button class="tab-btn" onclick="showTab('receitas', this)">🍳 Receitas (20+)</button>
+  <button class="tab-btn" onclick="showTab('porque', this)">💡 Por que comer assim?</button>
+  <button class="tab-btn" onclick="showTab('maleficios', this)">⚠️ Malefícios dos Ultraprocessados</button>
+  <button class="tab-btn" onclick="showTab('compras', this)">🧾 Lista de compras</button>
+</div>
+
+<div class="container">
+
+  <section id="plano" class="tab">
+    <h2>Plano alimentar de 7 dias — com quantidades em gramas</h2>
+    <p class="small">As quantidades são estimativas para fornecer energia sem excesso. Ajuste conforme sua fome/objetivos.</p>
+
+    <table>
+      <thead>
+        <tr><th>Dia</th><th>Café da Manhã</th><th>Almoço</th><th>Pré-treino</th><th>Jantar</th></tr>
+        <tr style="background:var(--panel);">
+          <td><strong>Horários</strong></td>
+          <td>~8:00</td>
+          <td>~12:30</td>
+          <td><strong>17:00–18:00 (ajustar)</strong></td>
+          <td><strong>~21:30 (pós-treino)</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>D1</td>
+          <td>Omelete 3 ovos (~180 g) + 50 g queso fresco/requesón/mozzarella + espinafre + 1 Cavendish (~110 g)</td>
+          <td>200 g <span class="highlight">carne bovina gordurosa (acém)</span> + salada (rúcula, tomate, pepino) + 100 g cenoura cozida</td>
+          <td>1 banana Cavendish (~110 g) + 20 g castanha de caju</td>
+          <td>200 g peixe grelhado (ex.: <span class="highlight">salmón, merluza, dorada</span>) + 120 g abobrinha + brócolis</td>
+        </tr>
+
+        <tr>
+          <td>D2</td>
+          <td>2 ovos mexidos (~120 g) + 120 g salmón defumado + 1 kiwi</td>
+          <td>220 g peixe grelhado (dorada/lubina) + salada + 80 g banana Cavendish</td>
+          <td>1/2 maçã + 30 g nozes</td>
+          <td>200 g <span class="highlight">carne bovina assada (picanha)</span> + couve refogada + 100 g cenoura cozida</td>
+        </tr>
+
+        <tr>
+          <td>D3</td>
+          <td>3 ovos cozidos (~180 g) + 30 g nozes + 1 fatia melão (150 g)</td>
+          <td>200 g <span class="highlight">carne bovina gordurosa (fraldinha)</span> + brócolis refogado + 1 fatia melão (150 g)</td>
+          <td>1/2 maçã + 1 banana (~110 g)</td>
+          <td>200 g peixe (caballa/atún) grelhado + salada + 40 g castanha de caju</td>
+        </tr>
+
+        <tr>
+          <td>D4</td>
+          <td>Omelete 3 ovos (~180 g) + 100 g <span class="highlight">carne desfiada</span> + 1/2 kiwi</td>
+          <td>250 g <span class="highlight">carne bovina assada (costela)</span> + salada + 100 g pastinaca cozida</td>
+          <td>1 maçã + 20 g mel</td>
+          <td>220 g <span class="highlight">carne bovina grelhada (contrafilé)</span> + couve refogada</td>
+        </tr>
+
+        <tr>
+          <td>D5</td>
+          <td>2 ovos fritos (~120 g) + 150 g carne moída + 1 laranja</td>
+          <td>200 g peixe ao forno + couve + 80 g taro cozido</td>
+          <td>1/2 maçã + 20 g <span class="highlight">nozes de macadâmia ou piñones</span></td>
+          <td>200 g <span class="highlight">carne moída refogada</span> + espinafre + 1 ovo cozido</td>
+        </tr>
+
+        <tr>
+          <td>D6</td>
+          <td>Omelete 3 ovos (~180 g) + 1 fatia melancia (~200 g)</td>
+          <td>200 g peixe grelhado + 150 g cenoura assada + salada</td>
+          <td>2 ovos cozidos (~120 g) + 1 banana (~110 g)</td>
+          <td>250 g <span class="highlight">carne bovina grelhada (acém)</span> + salada colorida</td>
+        </tr>
+
+        <tr>
+          <td>D7</td>
+          <td>3 ovos cozidos (~180 g) + 1 banana (~110 g) + café sem açúcar</td>
+          <td>200 g <span class="highlight">carne bovina assada (costela)</span> + espinafre + 100 g cenoura cozida</td>
+          <td>1 banana (~110 g) + 25 g nozes</td>
+          <td>200 g peixe grelhado + salada + 2 ovos cozidos (~120 g)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card-row">
+      <div class="card">
+        <div style="font-size:18px">💪 <strong>Proteína diária</strong></div>
+        <div style="font-size:24px;color:var(--accent);margin-top:8px;">~140–200 g</div>
+        <div class="small">Estimativa dependendo do dia — adequado para recuperação muscular.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:18px">⏱️ <strong>Duração</strong></div>
+        <div style="font-size:24px;color:var(--accent);margin-top:8px;">7 dias</div>
+        <div class="small">Plano rotativo semanal.</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:18px">🥚 <strong>Ovos por semana</strong></div>
+        <div style="font-size:24px;color:var(--accent);margin-top:8px;">40+</div>
+        <div class="small">Fonte barata e versátil de proteína.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="receitas" class="tab">
+    <h2>Receitas detalhadas (com quantidades e modo de preparo) — 20+ opções 🍳</h2>
+    <p class="small">Clique em cada receita para expandir e ver o modo de preparo. Ajuste sal e azeite conforme seu gosto.</p>
+
+    <div class="grid-recipes">
+      <details>
+        <summary>🥚 Omelete proteico com espinafre</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 3 ovos (≈180 g), 50 g queso fresco, 50 g espinafre, 10 g manteiga, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Derreta a manteiga em uma frigideira. Refogue o espinafre por 1-2 minutos. Em uma tigela, bata os ovos com sal e pimenta e junte o queijo. Despeje a mistura na frigideira e cozinhe por 2-3 minutos de cada lado até ficar firme e dourado.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🐟 Salmón grelhado com limão</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de salmón, 10 ml de azeite, sal, pimenta, 1/2 limão.</p>
+          <p><strong>Modo de preparo:</strong> Tempere o salmão com sal e pimenta. Aqueça o azeite em uma frigideira em fogo alto e grelhe o salmão por 3-4 minutos de cada lado, dependendo da espessura. Esprema o limão por cima antes de servir.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Bife de acém grelhado</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de acém, 5 g de sal, 5 g de alho em pó, 10 ml de azeite.</p>
+          <p><strong>Modo de preparo:</strong> Tempere o bife com sal e alho em pó. Aqueça o azeite em uma grelha ou frigideira. Grelhe o bife por 4-6 minutos de cada lado para um ponto médio. Ajuste o tempo conforme a sua preferência.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Carne bovina na manteiga</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de bife (fraldinha/picanha), 15 g de manteiga, sal grosso.</p>
+          <p><strong>Modo de preparo:</strong> Aqueça uma frigideira em fogo alto. Tempere o bife com sal grosso e sele por 2-3 minutos de cada lado para criar uma crosta. Abaixe o fogo, adicione a manteiga e regue a carne com a manteiga derretida por mais 1-2 minutos antes de servir.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🐟 Merluza à provençal</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de merluza, 10 ml de azeite, 1 dente de alho picado, salsa fresca picada, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Tempere o filé de merluza com sal e pimenta. Aqueça o azeite em uma frigideira. Doure o alho por 30 segundos, adicione o peixe e grelhe por 3-4 minutos de cada lado. Finalize com salsa picada.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥣 Vitamina rápida (pós-treino leve)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 1 banana (~110 g), 20 g de nozes.</p>
+          <p><strong>Modo de preparo:</strong> Basta adicionar todos os ingredientes no liquidificador e bater até obter uma mistura homogênea. Consuma logo após o preparo para um lanche rápido e nutritivo.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥗 Salada robusta com atum</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 100 g de atum em água (escorrido), 100 g de mix de folhas verdes, 30 g de nozes, 10 ml de azeite e vinagre a gosto.</p>
+          <p><strong>Modo de preparo:</strong> Misture as folhas verdes, o atum e as nozes em uma tigela. Tempere com azeite, vinagre, sal e pimenta. Sirva imediatamente.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍳 Ovos mexidos com queijo mozzarella</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 3 ovos (180 g), 40 g de mozzarella ralada, 10 g de manteiga, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Bata os ovos em uma tigela. Derreta a manteiga em uma frigideira em fogo baixo. Adicione os ovos batidos e mexa continuamente com uma espátula por 3-4 minutos. Quando estiverem quase prontos, adicione a mozzarella e misture até que derreta. Tempere e sirva.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍖 Costela assada (batch cook)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 1 kg de costela, sal, pimenta, 40 g de manteiga.</p>
+          <p><strong>Modo de preparo:</strong> Tempere a costela com sal e pimenta. Cubra com manteiga. Embrulhe bem em papel alumínio e leve ao forno pré-aquecido a 150°C. Asse por 3-4 horas, ou até que a carne esteja macia e se descolando do osso. Porcione e guarde na geladeira ou congele para a semana.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥛 Leite morno com mel (antes de dormir)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 10 g de mel.</p>
+          <p><strong>Modo de preparo:</strong> Aqueça o leite em uma panela ou no micro-ondas até ficar morno. Adicione o mel e misture bem. Consuma cerca de 30 minutos antes de dormir para ajudar a relaxar.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍠 Batata alternativa: banana assada</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 1 banana Cavendish (~110 g), 20 g de castanhas de caju.</p>
+          <p><strong>Modo de preparo:</strong> Preaqueça o forno a 180°C. Coloque a banana inteira (com a casca) em uma assadeira e asse por cerca de 20 minutos. Ela deve ficar macia e doce por dentro. Sirva com as castanhas por cima para um pré-treino rápido.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Acém ao alho e ervas</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de acém, 10 g de alho picado, ervas (alecrim, tomilho), 10 ml de azeite, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Misture o alho picado, as ervas, azeite, sal e pimenta. Esfregue essa mistura no acém e deixe marinar por 30 minutos. Leve para assar em forno pré-aquecido a 200°C por 25-30 minutos.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥚 Ovos cozidos perfeitos</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 2 ovos grandes.</p>
+          <p><strong>Modo de preparo:</strong> Coloque os ovos em uma panela e cubra com água fria. Leve para ferver. Quando a água começar a borbulhar, cozinhe por 8-9 minutos para uma gema mais firme. Transfira os ovos para um pote com água fria e gelo para parar o cozimento. Descasque e consuma como um snack pós-treino.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Strogonoff simplificado (sem creme industrial)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de carne bovina em tiras, 1 cebola picada, 50 g de cogumelos fatiados, 30 g de queijo requesón, azeite, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Refogue a cebola e os cogumelos no azeite. Adicione a carne em tiras e doure. Tempere com sal e pimenta. Quando a carne estiver cozida, desligue o fogo e adicione o queijo requesón, mexendo para que derreta e crie um molho cremoso. Sirva imediatamente.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍤 Peixe grelhado com salsa de tomate</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de peixe, 60 g de tomate picado, 5 g de cebola picada, suco de 1/2 limão e coentro picado.</p>
+        <p><strong>Modo de preparo:</strong> Prepare a salsa misturando o tomate, a cebola, o limão e o coentro. Reserve. Grelhe o peixe temperado com sal e pimenta em uma frigideira quente. Sirva o peixe com a salsa crua por cima.</p>
+      </div>
+      </details>
+
+      <details>
+        <summary>🥙 Wrap improvisado (folha grande de alface)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de carne desfiada, 30 g de queijo requesón, folhas grandes de alface.</p>
+          <p><strong>Modo de preparo:</strong> Aqueça a carne desfiada. Coloque a carne e o queijo requesón sobre uma folha de alface grande. Enrole para formar um wrap. É uma alternativa rápida e sem carboidratos refinados.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍮 Iogurte integral com mel e nozes</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 150 g de iogurte integral, 10 g de mel, 20 g de nozes picadas.</p>
+          <p><strong>Modo de preparo:</strong> Em um pote, misture o iogurte com o mel. Adicione as nozes por cima para dar uma textura crocante.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍳 Tortilla rápida de batata alternativa (cenoura ralada)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 3 ovos, 150 g de cenoura ralada, 30 g de queijo mozzarella, azeite, sal e pimenta.</p>
+          <p><strong>Modo de preparo:</strong> Bata os ovos com a cenoura ralada, o queijo, sal e pimenta. Aqueça um pouco de azeite em uma frigideira. Despeje a mistura e cozinhe por 5-7 minutos de cada lado, até ficar dourada e cozida por dentro.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Ensopado rápido de carne</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de carne em cubos, 100 g de cenoura picada, 50 g de pastinaca picada, temperos (sal, pimenta, páprica), água.</p>
+          <p><strong>Modo de preparo:</strong> Doure a carne em uma panela. Adicione os vegetais e os temperos. Cubra com água e cozinhe em fogo baixo por 20-25 minutos, ou até que a carne e os vegetais estejam macios. Sirva quente.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🍫 Snack: Banana com nozes</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 1 banana grande, 20 g de nozes picadas.</p>
+          <p><strong>Modo de preparo:</strong> Corte a banana ao meio no sentido do comprimento. Polvilhe as nozes picadas por cima. É um pré-treino de rápida digestão, perfeito para dar energia e gorduras boas.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥩 Hambúrguer caseiro (sem pão)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 g de carne moída, sal, pimenta, fatias de queijo requesón, salada de sua preferência.</p>
+          <p><strong>Modo de preparo:</strong> Modele a carne moída em forma de hambúrguer e tempere com sal e pimenta. Grelhe em uma frigideira ou grelha por 3-4 minutos de cada lado, até atingir o ponto desejado. Sirva sobre uma cama de salada e com fatias de queijo requesón por cima.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥚 Shakshuka simplificada</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 2 ovos, 150 g de tomate picado, 1/2 cebola picada, pimenta, azeite e sal.</p>
+          <p><strong>Modo de preparo:</strong> Em uma frigideira, refogue a cebola no azeite. Adicione o tomate picado e os temperos e cozinhe por 5 minutos até formar um molho. Quebre os ovos sobre o molho e cozinhe por mais 6-8 minutos, até que as claras estejam firmes e as gemas ainda moles. Sirva diretamente da frigideira.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🥛 Leite fermentado caseiro (kefir style)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 200 ml de leite integral, 1 colher de sopa de iogurte natural (com culturas vivas) ou grãos de kefir (opcional).</p>
+          <p><strong>Modo de preparo:</strong> Misture os ingredientes em um pote de vidro. Deixe em temperatura ambiente por 12-24 horas. Ele vai engrossar e ficar com um sabor levemente ácido. Guarde na geladeira após a fermentação. É uma forma de melhorar a digestibilidade do leite.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>🌰 Mix energético (oleaginosas)</summary>
+        <div class="recipe-content">
+          <p><strong>Ingredientes:</strong> 30 g de mix de nozes, castanha de caju e amêndoas.</p>
+          <p><strong>Modo de preparo:</strong> Simplesmente misture as oleaginosas. Consuma como um snack rápido e nutritivo, rico em gorduras boas e minerais.</p>
+        </div>
+      </details>
+
+    </div>
+
+    <p class="small" style="margin-top:12px;"></p>
+  </section>
+
+  <section id="porque" class="tab">
+    <h2>Por que comer assim? — benefícios detalhados 💡</h2>
+    <p class="small">Abaixo estão os benefícios das categorias principais de alimentos incluídos na Dieta da Selva.</p>
+
+    <div class="card-row" style="margin-top:12px;">
+      <div class="card">
+        <div style="font-size:16px">🥩 <strong>Carne gordurosa — benefícios</strong></div>
+        <ul>
+          <li>Fonte concentrada de energia (gordura) — útil para saciedade e esforços longos.</li>
+          <li>Rica em colesterol e ácidos graxos necessários para produção hormonal (testosterona etc.).</li>
+          <li>Contém ferro heme (alta biodisponibilidade) e zinco — importantes para performance e recuperação.</li>
+          <li>Vitaminas lipossolúveis (A, D em cortes gordurosos) quando presentes.</li>
+          <li>Para atletas, fornece aminoácidos essenciais para reparo muscular.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🧈 <strong>Manteiga — benefícios</strong></div>
+        <ul>
+          <li>Fonte de energia imediata e sabor; contém vitamina A e pequenas quantidades de vitamina K2.</li>
+          <li>Quando usada com moderação, é estável para cozimento curto; promove saciedade.</li>
+          <li>Manteiga clarificada (ghee) tem ponto de fumaça maior e é uma opção estável para frituras.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🥛 <strong>Leite e laticínios (queso fresco/requesón/mozzarella)</strong></div>
+        <ul>
+          <li>Ricos em proteína de alta qualidade (caseína e soro) — útil para recuperação muscular.</li>
+          <li>Fonte de cálcio, fósforo e vitaminas do complexo B.</li>
+          <li>Produtos menos processados (requesón/queso fresco) mantêm boa densidade nutricional com custo reduzido.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-row" style="margin-top:12px;">
+      <div class="card">
+        <div style="font-size:16px">🥚 <strong>Ovos — benefícios</strong></div>
+        <ul>
+          <li>Completa fonte de proteína (aminoácidos essenciais) e colina (cérebro/recuperação).</li>
+          <li>Fácil preparo e baixo custo por grama de proteína.</li>
+          <li>Gemas contêm vitaminas A, D, E e minerais importantes.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🍓🍯 <strong>Frutas + Mel — benefícios</strong></div>
+        <ul>
+          <li>Frutas fornecem carboidratos de rápida digestão para pré-treino e reposição de glicogênio.</li>
+          <li>Vitaminas (C) e antioxidantes (licopeno na melancia) ajudam recuperação e saúde imune.</li>
+          <li>Mel: fonte rápida de glicose/energia, com propriedades antimicrobianas leves; bom em pequenas quantidades.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🍉 <strong>Melancia e sementes — benefícios</strong></div>
+        <ul>
+          <li>Melancia: alta hidratação (≈90% água), fonte de licopeno, vitamina C e potássio — boa para hidratação pós-treino.</li>
+          <li>Sementes de melancia: ricas em magnésio, zinco, gorduras boas e fibras; melhor consumir torradas/assadas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <h3 style="color:var(--accent)">Cenoura como fonte de carboidrato</h3>
+      <p class="small">100 g de cenoura crua ≈ 10 g carboidratos; fornece betacaroteno (precursor da vitamina A) e fibras. Boa para variar as fontes de carbo.</p>
+    </div>
+
+    <div class="card-row" style="margin-top:12px;">
+      <div class="card">
+        <div style="font-size:16px">🍯 <strong>Uso de Mel em Sobremesas e Lanches</strong></div>
+        <ul>
+          <li><strong>Consumo com Frutas:</strong> O melhor horário é no pré-treino, pois a combinação de carboidratos das frutas e a glicose do mel oferece energia rápida.</li>
+          <li><strong>Consumo com Iogurte:</strong> Ideal para lanches ou sobremesas, pois a proteína e gordura do iogurte equilibram a absorção do açúcar do mel, promovendo saciedade.</li>
+          <li><strong>Quantidade:</strong> Use com moderação. Uma colher de sopa de mel (cerca de 20-25g) é uma dose suficiente para um impulso de energia sem excesso de açúcar.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="small" style="margin-top:10px;"><strong>Observação importante:</strong> Esses benefícios são gerais — se tiver histórico de dislipidemia, colesterol ou condições médicas, consulte seu médico para monitorização (perfil lipídico, função renal, etc.).</p>
+  </section>
+
+  <section id="maleficios" class="tab">
+    <h2>⚠️ Malefícios dos Ultraprocessados</h2>
+    <p class="small">Descrição dos principais riscos associados ao consumo frequente de produtos ultraprocessados, óleos vegetais refinados e alimentos ricos em açúcar refinado.</p>
+
+    <div class="card-row" style="margin-top:12px;">
+      <div class="card">
+        <div style="font-size:16px">🍔 <strong>Fast-foods (ex.: Burger King, McDonald's)</strong></div>
+        <ul>
+          <li>Alto teor de calorias, gorduras saturadas/trans (em alguns itens), sódio e açúcares adicionados — associado a ganho de peso e risco cardiovascular quando consumido em excesso.</li>
+          <li>Produtos frequentemente muito processados com aditivos, conservantes e ingredientes de baixa densidade nutricional.</li>
+          <li>Consumo habitual pode elevar pressão arterial, piorar perfil lipídico e aumentar resistência insulínica.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🛢️ <strong>Óleos vegetais refinados (canola, girassol, soja)</strong></div>
+        <ul>
+          <li>Processamento pode gerar produtos oxidativos e compostos indesejáveis; reutilização em frituras piora o efeito.</li>
+          <li>Alto aporte de ômega‑6 relativo ao ômega‑3 pode contribuir para desequilíbrio inflamatório se a dieta for rica em ômega‑6 e pobre em ômega‑3.</li>
+          <li>Prefira azeite extra‑virgem para tempero; para frituras, opções como manteiga clarificada/ghee ou banha (em moderação) têm maior estabilidade.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div style="font-size:16px">🍫 <strong>Produtos ricos em açúcar refinado (ex.: Milka, Nutella)</strong></div>
+        <ul>
+          <li>Alto teor de açúcar e calorias vazias; consumo crônico ligado a obesidade, resistência insulínica e cáries.</li>
+          <li>Frequentemente combinados com gorduras de baixa qualidade e aditivos; prejudicam controle de glicemia e saciedade.</li>
+          <li>Recomenda-se consumo esporádico e porções muito controladas se quiser manter padrão saudável.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-row" style="margin-top:12px;">
+      <div class="card">
+        <div style="font-size:16px">🍚 <strong>Arroz e Macarrão: A "Ração do Governo"?</strong></div>
+        <ul>
+          <li><strong>Baixa densidade nutricional:</strong> Tanto o arroz branco quanto o macarrão são predominantemente carboidratos (amido), com poucas vitaminas, minerais e fibras, especialmente após o processamento.</li>
+          <li><strong>Alto índice glicêmico:</strong> Consumi-los eleva rapidamente o nível de açúcar no sangue, o que exige um esforço maior do pâncreas para produzir insulina. A longo prazo, isso pode levar à resistência à insulina.</li>
+          <li><strong>Contexto histórico:</strong> São alimentos baratos e de fácil estocagem, por isso foram popularizados em programas de cesta básica e merenda escolar. Essa associação com a comida mais "básica" e menos nutritiva levou ao termo pejorativo "ração do governo".</li>
+          <li><strong>Inflamação:</strong> O consumo excessivo de amidos e açúcares pode contribuir para a inflamação crônica, que está ligada a diversas doenças modernas.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <h3 style="color:var(--accent)">Exemplos e por que evitar (prático)</h3>
+      <ul>
+        <li><strong>Burgers com excesso de processados:</strong> pães muito refinados + molhos com açúcar + óleos refinados = refeição de baixa qualidade nutricional.</li>
+        <li><strong>Produtos tipo Nutella / chocolates industriais:</strong> alto açúcar + óleos vegetais processados — bom evitar como rotina.</li>
+        <li><strong>Frituras em restaurantes:</strong> frequência de reutilização do óleo aumenta formação de compostos oxidativos — reduzir consumo.</li>
+      </ul>
+      <p class="small">Em suma: a frequência e o padrão geral da dieta são mais importantes do que um item isolado. A estratégia recomendada é priorizar alimentos inteiros e minimizar ultraprocessados e frituras com óleos refinados.</p>
+    </div>
+  </section>
+
+  <section id="compras" class="tab">
+    <h2>🧾 Lista de compras (quantidades semanais aproximadas)</h2>
+    <p class="small">As quantidades são estimadas para 1 pessoa seguindo o plano de 7 dias.</p>
+
+    <table>
+      <thead><tr><th>Item</th><th>Quantidade (aprox.)</th></tr></thead>
+      <tbody>
+        <tr><td>Carne bovina (cortes gordurosos como acém, fraldinha, contrafilé)</td><td>~1,500 g</td>
+        <tr><td>Peixe (salmón, merluza, dorada, lubina, caballa, atún)</td><td>~1,160 g</td></tr>
+        <tr><td>Ovos</td><td>~42 unidades (~2,520 g)</td></tr>
+        <tr><td>Queso fresco / Requesón / Mozzarella fresca</td><td>~200 g</td></tr>
+        <tr><td>Banana Cavendish</td><td>~770 g</td></tr>
+        <tr><td>Frutas variadas (melão, maçã, kiwi, laranja)</td><td>~3,500 g</td></tr>
+        <tr><td>Cenoura</td><td>~1,000 g</td></tr>
+        <tr><td>Pastinaca / taro (opcional)</td><td>~300 g</td></tr>
+        <tr><td>Legumes/verduras (espinafre, couve, brócolis, abobrinha)</td><td>~2,000 g</td></tr>
+        <tr><td>Oleaginosas (nozes, castanha de caju, nozes de macadâmia/piñones)</td><td>~320 g</td></tr>
+        <tr><td>Mel</td><td>~100 g</td></tr>
+        <tr><td>Leite integral / iogurte</td><td>~2–3 litros</td></tr>
+        <tr><td>Manteiga / Ghee</td><td>~200–300 g</td></tr>
+        <tr><td>Azeite extra-virgem</td><td>~100–200 ml</td></tr>
+      </tbody>
+    </table>
+
+    <p class="small">Dica: prefira comprar porções maiores em promoção e porcionar (congelar) para economizar tempo e dinheiro.</p>
+  </section>
+
+</div>
+
+<footer>
+  </footer>
+
+</body>
+</html>
