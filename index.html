@@ -4,6 +4,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Dieta da Selva — Plano Completo</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <style>
     /* DARK THEME inspirado na imagem */
     :root{
@@ -51,89 +52,4 @@
     .emoji{font-size:18px;margin-right:8px;}
     footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center;}
     code{background:#06242a;padding:2px 6px;border-radius:6px;color:var(--accent);}
-    .grid-recipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;}
-    .highlight{color:var(--accent-2);font-weight:700;}
-    
-    /* Estilo para as receitas expansíveis */
-    details {
-      background: var(--panel);
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      margin-bottom: 12px;
-      cursor: pointer;
-      transition: transform 0.1s ease;
-    }
-    summary {
-      font-size: 16px;
-      font-weight: bold;
-      color: #e6f3f0;
-      list-style: none; /* Remove o marcador padrão do summary */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: transform 0.1s ease;
-    }
-    summary:active { transform: scale(0.99); }
-    summary::after {
-      content: '▶️';
-      font-size: 14px;
-      margin-left: 10px;
-      transition: transform 0.2s;
-    }
-    details[open] > summary::after {
-      content: '🔽';
-      transform: rotate(90deg);
-    }
-    .recipe-content {
-      padding-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-    .recipe-content strong {
-      color: var(--accent);
-    }
-    /* responsive */
-    @media(max-width:720px){ 
-      header{flex-direction:column;align-items:flex-start;} 
-      .user-profile { align-self: flex-end; }
-      .card-row{flex-direction:column;} 
-    }
-  </style>
-  <script defer>
-    if (sessionStorage.getItem("loggedIn") !== "true") {
-      window.location.href = "login.html";
-    }
-  </script>
-  <script>
-    function showTab(id, btn){
-      document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      btn.classList.add('active');
-      window.scrollTo({top:0,behavior:'smooth'});
-    }
-    window.addEventListener('DOMContentLoaded', ()=>{ document.querySelectorAll('.tab-btn')[0].click(); });
-  </script>
-</head>
-<body>
-
-<header>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <div style="font-size:20px">🌿</div>
-    <div>
-      <h1>Dieta da Selva — Plano Completo</h1>
-      <p class="small">Adaptado para praticante de Jiu-Jitsu — 1,90 m / ~87 kg. Consulte profissional de saúde.</p>
-    </div>
-  </div>
-  <div class="user-profile">
-    <img src="foto de perfil.jpg" alt="Foto de Perfil">
-  </div>
-</header>
-
-<div class="alert">⚠️ <strong>Aviso:</strong> Este guia é informativo, baseado em conteúdos públicos e adaptações. Não substitui avaliação médica/nutricional personalizada.</div>
-
-<div class="tabs">
-  <button class="tab-btn" onclick="showTab('plano', this)">📋 Plano 7 dias</button>
-  <button class="tab-
+    .grid-recipes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap
