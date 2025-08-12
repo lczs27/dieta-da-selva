@@ -4,8 +4,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>Dieta da Selva — Login</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <style>
-        /* Estilos do tema DARK */
         :root{
             --bg:#071523;
             --panel:#0c2430;
@@ -141,7 +141,6 @@
             const passwordInput = document.getElementById('password');
             const errorMessage = document.getElementById('error-message');
 
-            // Usuário e senha redefinidos aqui
             const username = document.getElementById('username').value;
             const password = passwordInput.value;
 
@@ -150,7 +149,7 @@
                 window.location.href = "index.html";
             } else {
                 errorMessage.style.display = 'block';
-                passwordInput.value = ''; // Limpa a senha
+                passwordInput.value = '';
             }
         }
     </script>
